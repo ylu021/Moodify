@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 ALLOWED_EXTENSIONS = set(['png','jpg','jpeg'])
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLDER = os.path.join(APP_ROOT, 'static/uploads')
+UPLOAD_FOLDER = os.path.join(APP_ROOT, 'uploads/')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
@@ -42,9 +42,9 @@ def upload_file():
 		return redirect(url_for('uploaded_file', filename=filename))
 	return "ERROR"
 	
-@app.route("/uploads/<filename>")
-def uploaded_file(filename):
-	return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+# @app.route("/uploads/<filename>")
+# def uploaded_file(filename):
+# 	return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
