@@ -12,8 +12,8 @@ def get_live_twitter_feed():
     auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
     auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
     api = tweepy.API(auth)
-    user = api.get_user('AndrewYNg')
-    timeline = api.user_timeline(screen_name = 'AndrewYNg', count = 100, include_rts = False)
+    user = api.get_user('taylorswift13')
+    timeline = api.user_timeline(screen_name = 'AndrewYNg', count = 20, include_rts = False)
     # timeline = user.timeline
     # print dir(timeline)
 
@@ -44,5 +44,5 @@ def generate_cache():
 
 if __name__ == '__main__':
     # generate_cache()
-    print get_cached_twitter_feed()
+    # print get_cached_twitter_feed()
     # get_live_twitter_feed()
