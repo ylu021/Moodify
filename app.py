@@ -40,6 +40,7 @@ def upload_file():
 		filename = secure_filename(file.filename)
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
 		return redirect(url_for('uploaded_file', filename=filename))
+	return "ERROR"
 	
 @app.route("/uploads/<filename>")
 def uploaded_file(filename):
