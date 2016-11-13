@@ -1,4 +1,4 @@
-import http.client, urllib.request, urllib.parse, urllib.error, base64,json
+import httplib, urllib, base64, json
 
 
 def get_strongest_emotion(raw_result):
@@ -9,8 +9,8 @@ def get_strongest_emotion(raw_result):
     """
 
     num_faces, res = len(raw_result), raw_result
-    print(res[0])
-    print(num_faces)
+    # print(res[0])
+    # print(num_faces)
     if num_faces < 1:
         return None
     elif num_faces == 1:
@@ -25,21 +25,57 @@ headers = {
     'Ocp-Apim-Subscription-Key': '6efa889bfbe148baa9fa5782e2747ba8',
 }
 
-params = urllib.parse.urlencode({
+params = urllib.urlencode({
 })
 
-try:
-    conn = http.client.HTTPSConnection('api.projectoxford.ai')
-    conn.request("POST", "/emotion/v1.0/recognize?%s" % params, "{ \"url\": \"http://i.dailymail.co.uk/i/pix/2015/03/02/2618B90700000578-2975699-Bill_Gates_pictured_last_week_was_once_again_named_the_world_s_r-m-4_1425307530818.jpg\" }", headers)
-    response = conn.getresponse()
-    data = response.read().decode()
+#hard-coded images
+arr = [
+    'http://i.dailymail.co.uk/i/pix/2014/01/09/article-2536579-1A86E6E100000578-463_634x626.jpg',
+    'http://img2.timeinc.net/people/i/2016/news/160208/taylor-swift-01-435.jpg',
+    'https://s-media-cache-ak0.pinimg.com/236x/70/1f/8b/701f8b05ff6a8a3cd8db3ded83a748f6.jpg',
+    'http://sev.h-cdn.co/assets/15/09/1424899427-rs_600x800-150225111050-b-nxvsqwkaari6_.jpg',
+    'http://media.cmgdigital.com/shared/lt/lt_cache/aresize/835x529/img/photos/2016/05/28/d2/68/Taylor_Swift_cat_selfie.PNG',
+    'https://i.ytimg.com/vi/3oKucp489qc/hqdefault.jpg',
+    'http://static.celebuzz.com/uploads/2014/11/12/1-400x391.png',
+    'https://pbs.twimg.com/media/By815U7IcAAPJdd.jpg',
+    'http://67.media.tumblr.com/51d2a9e8134c497e6fd6c87b695f8b06/tumblr_n3zdnjCChE1rshsako1_500.png',
+    'http://data.whicdn.com/images/230709931/large.jpg'
+]
 
-    jsonresult = json.loads(data)
-    print(jsonresult)
+emotions = []
 
-    print(get_strongest_emotion(jsonresult))
+for item in arr:
 
-    conn.close()
-except Exception as e:
-    print("[Errno {0}]".format(e))
+    try:
+        conn = httplib.HTTPSConnection('api.projectoxford.ai')
+        conn.request("POST", "/emotion/v1.0/recognize?%s" % params, "{ 'url': '%s' }" % item, headers)
+        response = conn.getresponse()
+        data = response.read().decode()
+
+        jsonresult = json.loads(data)
+        # print(jsonresult)
+
+        # print(get_strongest_emotion(jsonresult))
+        emotions.append(get_strongest_emotion(jsonresult))
+
+        conn.close()
+    except Exception as e:
+        print("[Errno {0}]".format(e))
+
+def traverse(o, tree_types=(list, tuple)):
+    if isinstance(o, tree_types):
+        for value in o:
+            for subvalue in traverse(value, tree_types):
+                yield subvalue
+    else:
+        yield o
+
+def findMax(list):
+    from collections import Counter
+    cnt = Counter(list)
+    return cnt.most_common(1)
+
+#overall emotion
+def exportEmotion():
+    return findMax(list(traverse(emotions)))[0][0]
 
