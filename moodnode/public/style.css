@@ -21,6 +21,11 @@ p {
 	line-height: 1.62;
 }
 
+.fa {
+	font-size: 60pt!important;
+	color: #f37736;
+}
+
 .content {
     font-size: 36pt;
 }
