@@ -2,16 +2,42 @@
 <html>
 <head>
 	<title>Moodify</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./style.css">
 </head>
-<body>
-<h1>Mood of the Week</h1>
-<p>Do you want to know how you are feeling this week? Upload 10 images(MAX) and input your twitter account, and we'll do the rest to calculate your sentiment</p>
-<form id        =  "uploadForm"
+<body class="text-center">
+<div class="container-fluid">
+<header>
+<h1>Moodify</h1>
+</header>
+<div class="container-fluid" id="body">
+<h2>Mood of the Week</h2>
+<p>Do you want to know how you are feeling this week? </p>
+<p>Upload 10 images(MAX) and input your twitter account, and we'll do the rest to calculate your average emotion and sentiment</p>
+<!-- <form id        =  "uploadForm"
      enctype   =  "multipart/form-data"
      action    =  "/uploads"
-     method    =  "post"
->
+     method    =  "post">
 <input type="file" name="userPhoto" multiple />
 <input type="submit" value="Upload Image" name="submit">
-</form>
+</form> -->
+</div>
+<div id="bg"></div>
+<footer>
+	<p>Moodify@2016</p>
+</footer>
+</div>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+	//var myEmotion = JSON.parse(result);
+	//alert(result[0].emotion);
+	$.getJSON("./result.json",function(data){
+		$.each(data,function(key,val){
+			if(key=='sentiment'){
+				val = (Math.round(parseFloat(val)*100)/100)*100+"%"
+			}
+			$("#body").append("<div class='content'>"+key+": "+val+"</div>");	
+		});
+	});
+</script>
 </body>

@@ -1,0 +1,35 @@
+header {
+	/* background: url(http://www.color-hex.com/palettes/807.png); */
+	padding: 30px 0;
+}
+
+h1 {
+	font-size: 30pt;
+}
+
+#bg {
+	background: url(http://www.color-hex.com/palettes/807.png);
+	height: 30vh;
+}
+
+#body {
+	height: 70vh;
+}
+
+p {
+	font-size: 12pt;
+	line-height: 1.62;
+}
+
+.content {
+    font-size: 36pt;
+}
+
+.content:nth-of-type(1) {
+    color: lightsalmon;
+}
+
+.content:nth-of-type(2) {
+    color: #22b573;
+}
+
