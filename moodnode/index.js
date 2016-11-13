@@ -53,7 +53,7 @@ app.post('/uploads',upload.array('userPhoto',10), function(req,res){
 //    res.send('Photo array?: ' + req.body.userPhoto);
 //});
 
-app.listen(8000, function(){
-        console.log('Listening at port 8000');
+app.listen(80, function(){
+        console.log('Listening at port 80');
 });
 
