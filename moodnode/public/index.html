@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Moodify</title>
+</head>
+<body>
+<h1>Mood of the Week</h1>
+<p>Do you want to know how you are feeling this week? Upload 10 images(MAX) and input your twitter account, and we'll do the rest to calculate your sentiment</p>
+<form id        =  "uploadForm"
+     enctype   =  "multipart/form-data"
+     action    =  "/uploads"
+     method    =  "post"
+>
+<input type="file" name="userPhoto" />
+<input type="submit" value="Upload Image" name="submit">
+</form>
+</body>
