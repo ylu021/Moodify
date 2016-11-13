@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Moodify</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+	<h1>Mood of the week</h1>
+	<p>Do you want to know how you are feeling this week? Upload 10 images(MAX) and input your twitter account, and we'll do the rest to calculate your sentiment</p>
+	<form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+		<input type="file" name="user_image" max-uploads = 10 accept="image/*" multiple >
+		<p></p>
+		<input type="submit" value="Upload" />
+		<fieldset id="progress" style="display: none">
+	        <legend>Files Progress</legend>
+
+	        <div class="progress-trough">
+	            <div id="progress-bar" class="progress-bar">0%</div>
+	        </div>
+		</fieldset><p>
+	</form>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/bower_components/jquery-3.1.1.min.js') }}"></script>
+</body>
+</html>
