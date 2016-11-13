@@ -24,6 +24,8 @@ p {
 .fa {
 	font-size: 60pt!important;
 	color: #f37736;
+	line-height: 1.62;
+	padding: 5px;
 }
 
 .content {
